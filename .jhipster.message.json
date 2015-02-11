@@ -1,0 +1,26 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "created",
+            "fieldType": "DateTime",
+            "fieldNameCapitalized": "Created",
+            "fieldNameUnderscored": "created"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "payload",
+            "fieldType": "String",
+            "fieldNameCapitalized": "Payload",
+            "fieldNameUnderscored": "payload"
+        }
+    ],
+    "fieldsContainOwnerManyToMany": false,
+    "fieldsContainOneToMany": false,
+    "fieldsContainLocalDate": false,
+    "fieldsContainCustomTime": true,
+    "fieldsContainBigDecimal": false,
+    "fieldsContainDateTime": true,
+    "changelogDate": "20150211185122"
+}
