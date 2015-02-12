@@ -1,3 +1,4 @@
+node_modules
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -7,3 +8,4 @@ release.properties
 /.settings/
 /.classpath
 /.project
+npm-debug.log
