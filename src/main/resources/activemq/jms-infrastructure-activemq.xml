@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 		http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
 
 	<broker xmlns="http://activemq.apache.org/schema/core"
-		brokerName="brokerB1"
-		dataDirectory="target/data">
+		brokerName="brokerB1" dataDirectory="target/data">
 
 		<!-- For better performances use VM cursor and small memory limit. For 
 			more information, see: http://activemq.apache.org/message-cursors.html Also, 
@@ -44,7 +42,7 @@
 			mechanism is the KahaDB store (identified by the kahaDB tag). For more information, 
 			see: http://activemq.apache.org/persistence.html -->
 		<persistenceAdapter>
-			<kahaDB directory="target/data/kahadb" />
+			<levelDB directory="target/activemq-data" />
 		</persistenceAdapter>
 
 
