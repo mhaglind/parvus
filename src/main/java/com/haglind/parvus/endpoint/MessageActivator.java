@@ -1,9 +1,9 @@
 package com.haglind.parvus.endpoint;
 
 import javax.inject.Inject;
+import javax.jms.BytesMessage;
 import javax.jms.JMSException;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 
 import org.joda.time.DateTime;
 import org.springframework.jms.listener.SessionAwareMessageListener;
@@ -16,20 +16,28 @@ import com.haglind.parvus.repository.MessageRepository;
 @Service
 @Transactional
 public class MessageActivator implements
-		SessionAwareMessageListener<TextMessage> {
+		SessionAwareMessageListener<BytesMessage>, IMessageActivator {
 
 	@Inject
 	MessageRepository repo;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.haglind.parvus.endpoint.IMessageActivator#onMessage(javax.jms.TextMessage
+	 * , javax.jms.Session)
+	 */
 	@Override
-	public void onMessage(TextMessage message, Session session)
+	public void onMessage(BytesMessage message, Session session)
 			throws JMSException {
 		
 		System.out.println(message);
 		Message msg = new Message();
-		msg.setPayload(message.getText());
+		byte[] bytes = new byte[ (int)message.getBodyLength()];
+		message.readBytes(bytes);
+		msg.setPayload(bytes.toString());
 		msg.setCreated(new DateTime());
 		repo.save(msg);
 	}
-
 }

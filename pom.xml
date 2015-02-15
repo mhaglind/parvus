@@ -45,6 +45,7 @@
 		<spring-cloud.version>1.1.0.RELEASE</spring-cloud.version>
 		<swagger-springmvc.version>0.8.8</swagger-springmvc.version>
 		<usertype-core.version>3.2.0.GA</usertype-core.version>
+		<paho.version>1.0.1</paho.version>
 	</properties>
 
 	<dependencies>
@@ -350,8 +351,31 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-leveldb-store</artifactId>
 			<version>${activemq.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>org.mortbay.jetty</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jsp-api-2.1</artifactId>
+					<groupId>org.mortbay.jetty</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jsp-2.1</artifactId>
+					<groupId>org.mortbay.jetty</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-mqtt</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+			<version>${paho.version}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>

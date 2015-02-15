@@ -4,11 +4,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="activeMqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-		<property name="brokerURL" value="tcp://localhost:61616" />
+		<!--  <property name="brokerURL" value="tcp://localhost:61616" />  -->
+		 <property name="brokerURL" value="mqtt://0.0.0.0:1883" />
+		
 	</bean>
 
 	<bean id="defaultQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg value="sendMessageQueue" />
+		<constructor-arg value="parvusqueue" />
 	</bean>
 
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
