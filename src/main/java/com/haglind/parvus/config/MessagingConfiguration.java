@@ -6,6 +6,8 @@ import javax.jms.Destination;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,11 +21,14 @@ import com.haglind.parvus.endpoint.IMessageActivator;
 @ImportResource("classpath:/activemq/jms-infrastructure-activemq.xml")
 public class MessagingConfiguration {
 
+	private final Logger log = LoggerFactory.getLogger(MessagingConfiguration.class);
+	
 	@Autowired
 	private IMessageActivator messageActivator;
 
 	@Bean
 	public DefaultMessageListenerContainer defaultMessageListenerContainer() {
+		log.debug("Creating MessageListenerContainer");
 		DefaultMessageListenerContainer myContainer = new DefaultMessageListenerContainer();
 		myContainer.setConcurrentConsumers(1);
 		myContainer.setMaxConcurrentConsumers(1);
@@ -36,15 +41,19 @@ public class MessagingConfiguration {
 
 	@Bean
 	public Destination defaultDestination() {
+		String queueName = "parvusqueue";
+		log.debug("Creating topic: " + queueName);
 		//ActiveMQQueue queue = new ActiveMQQueue("parvusqueue");
-		ActiveMQTopic topic = new ActiveMQTopic("parvusqueue");
+		ActiveMQTopic topic = new ActiveMQTopic(queueName);
 		return topic;
 	}
 
 	@Bean
 	public ConnectionFactory defaultConnectionFactory() {
+		String brokerUrl = "tcp://localhost:61616";
+		log.debug("Creating connection factory for " + brokerUrl);
 		ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
-		cf.setBrokerURL("tcp://localhost:61616");
+		cf.setBrokerURL(brokerUrl);
 		//cf.setBrokerURL("mqtt://0.0.0.0:1883");
 		cf.setClientID("parvus_server");
 		

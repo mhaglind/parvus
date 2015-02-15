@@ -49,10 +49,8 @@
 		<!-- The transport connectors expose ActiveMQ over a given protocol to 
 			clients and other brokers. For more information, see: http://activemq.apache.org/configuring-transports.html -->
 		<transportConnectors>
-		  
 			<transportConnector name="openwire" uri="tcp://0.0.0.0:61616" />
-			
-			<transportConnector name="mqtt" uri="mqtt://0.0.0.0:1883" />
+			<transportConnector name="mqtt" uri="mqtt://0.0.0.0:4443" />
 		</transportConnectors>
 
 	</broker>
